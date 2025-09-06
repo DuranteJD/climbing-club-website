@@ -10,20 +10,20 @@ const Events = () => {
       <Navbar />
       <div className="mt-16">
         <p className="text-center pt-3 text-error font-bold">
-          Note: Register on DSE first, you can use this{" "}
+          Note: Register on{" "}
           <a
             className="link"
             href="https://temple.dserec.com/online/clubsports"
             target="_blank"
             rel="noopener noreferrer"
           >
-            link
-          </a>
-          .
+            DSE
+          </a>{" "}
+          before buying.
         </p>
 
         <div className="flex justify-center">
-          <div className=" grid grid-cols-1 md:grid-cols-2 gap-10 px-5 py-10 ">
+          <div className=" grid grid-cols-1 md:grid-cols-2 gap-10 py-10 ">
             <div className="card w-96 bg-base-100 shadow-sm">
               <div className="card-body">
                 <span className="badge badge-xs badge-info">Most Popular</span>
