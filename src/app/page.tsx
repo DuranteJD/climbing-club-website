@@ -20,7 +20,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
           {/* Move content to bottom-left */}
-          <div className="absolute md:bottom-17  lg:left-28 z-10 text-white max-w-4xl px-10 bottom-10">
+          <div className="absolute md:bottom-17 lg:left-28 z-10 text-white max-w-4xl px-10 bottom-10">
             <h1 className="md:text-6xl text-4xl font-bold mb-7 drop-shadow-lg">
               Temple University Climbing Club
             </h1>
@@ -38,14 +38,14 @@ export default function Home() {
                 href="/practises/signup"
                 className="btn btn-outline md:btn-lg"
               >
-                Practises
+                Practices
               </Link>
             </div>
           </div>
         </div>
 
         {/* ABOUT SECTION */}
-        <section className="py-30 px-4  text-center">
+        <section className="py-30 px-4 text-center">
           <h2 className="text-4xl font-bold mb-1 text-gray-700">About Us!</h2>
           <p className="max-w-3xl mx-auto text-lg text-gray-600">
             The Temple University Rock Climbing Club welcomes climbers of all
@@ -54,7 +54,6 @@ export default function Home() {
         </section>
 
         {/* BODY CONTENT SECTION */}
-
         <section className="pb-8 px-4">
           <div className="space-y-12">
             <div className="space-y-6">
@@ -66,40 +65,40 @@ export default function Home() {
                     alt="Indoor climbing"
                     width={300}
                     height={200}
-                    className=" object-cover w-full h-100"
+                    className="object-cover w-full h-100"
                   />
                 </div>
                 <div className="flex-1 text-center p-10 flex flex-col gap-5 md:text-left">
-                  <h3 className="md:text-2xl  text-xl font-semibold mb-2 lg:text-3xl">
+                  <h3 className="md:text-2xl text-xl font-semibold mb-2 lg:text-3xl">
                     Weekly Training
                   </h3>
                   <p className="lg:text-lg">
                     Improve your skills with long practice sessions held weekly
-                    only available to club memebers
+                    only available to club members
                   </p>
                   <span className="badge badge-primary mt-3 lg:badge-lg">
-                    Practise
+                    Practice
                   </span>
                 </div>
               </div>
 
               {/* Horizontal Card 2 */}
-              <div className="card bg-base-200 flex flex-col md:flex-row-reverse items-center p-4 md:p-6 gap-4 ">
+              <div className="card bg-base-200 flex flex-col md:flex-row-reverse items-center p-4 md:p-6 gap-4">
                 <div className="flex-shrink-0 w-full md:w-24/50">
                   <Image
                     src="/imgs/temple-tufas.jpg"
                     alt="Outdoor Climbing"
                     width={300}
                     height={200}
-                    className=" object-cover w-full h-100"
+                    className="object-cover w-full h-100"
                   />
                 </div>
                 <div className="flex-1 text-center p-10 flex flex-col gap-5 md:text-left">
-                  <h3 className="md:text-2xl  text-xl font-semibold mb-2 lg:text-3xl">
+                  <h3 className="md:text-2xl text-xl font-semibold mb-2 lg:text-3xl">
                     TUFAS Bouldering Lounge
                   </h3>
                   <p className="lg:text-lg">
-                    Come with us for free every friday to TUFAS Boudlering
+                    Come with us for free every Friday to TUFAS Bouldering
                     Lounge, a rock climbing gym in Fishtown.
                   </p>
                   <span className="badge badge-secondary mt-3 lg:badge-lg">
@@ -120,7 +119,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex-1 text-center p-10 flex flex-col gap-5 md:text-left">
-                  <h3 className="md:text-2xl  text-xl font-semibold mb-2 lg:text-3xl">
+                  <h3 className="md:text-2xl text-xl font-semibold mb-2 lg:text-3xl">
                     Outdoor Trips
                   </h3>
                   <p className="lg:text-lg">

@@ -38,7 +38,7 @@ const Signup = () => {
                 memebership types visit the{" "}
                 <Link
                   className="link"
-                  href="/membership"
+                  href="/memberships"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
