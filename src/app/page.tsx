@@ -6,9 +6,9 @@ import Footer from "../../components/Footer";
 export default function Home() {
   return (
     <>
-      <div className="bg-base-200">
+      <div className="bg-base-100">
         <Navbar />
-        <div className="hero min-h-[93vh] relative">
+        <div className="hero min-h-screen relative">
           <Image
             src="/imgs/hero.jpg"
             alt="Temple Climbing Club"
@@ -44,31 +44,24 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ABOUT SECTION */}
-        <section className="py-30 px-4 text-center">
-          <h2 className="text-4xl font-bold mb-1 text-gray-700">About Us!</h2>
-          <p className="max-w-3xl mx-auto text-lg text-gray-600">
-            The Temple University Rock Climbing Club welcomes climbers of all
-            levels.
-          </p>
-        </section>
-
         {/* BODY CONTENT SECTION */}
-        <section className="pb-8 px-4">
+        <section className="pt-6 px-4">
           <div className="space-y-12">
             <div className="space-y-6">
               {/* Horizontal Card 1 */}
-              <div className="card bg-base-100 shadow-lg flex flex-col md:flex-row items-center p-0 gap-4 rounded-none">
-                <div className="flex-shrink-0 w-full md:w-24/50">
+              <div className="card shadow-lg flex flex-col md:flex-row items-center p-0 gap-4  bg-black">
+                <div className="flex-shrink-0 w-full md:w-23/50">
                   <Image
                     src="/imgs/temple-indoor.jpg"
-                    alt="Indoor climbing"
-                    width={300}
-                    height={200}
-                    className="object-cover w-full h-100"
+                    width={400}
+                    height={400}
+                    alt=""
+                    className="object-cover w-full h-120 md:rounded-l-2xl
+                    rounded-t-2xl
+                    md:rounded-t-none"
                   />
                 </div>
-                <div className="flex-1 text-center p-10 flex flex-col gap-5 md:text-left">
+                <div className="flex-1 text-center p-10 flex flex-col gap-8 md:text-left text-base-100">
                   <h3 className="md:text-2xl text-xl font-semibold mb-2 lg:text-3xl">
                     Weekly Training
                   </h3>
@@ -76,24 +69,22 @@ export default function Home() {
                     Improve your skills with long practice sessions held weekly
                     only available to club members
                   </p>
-                  <span className="badge badge-primary mt-3 lg:badge-lg">
-                    Practice
-                  </span>
+                  <span className="badge mt-3 lg:badge-lg">Practice</span>
                 </div>
               </div>
 
               {/* Horizontal Card 2 */}
-              <div className="card bg-base-200 flex flex-col md:flex-row-reverse items-center p-4 md:p-6 gap-4">
-                <div className="flex-shrink-0 w-full md:w-24/50">
+              <div className="card flex flex-col md:flex-row-reverse items-center p-0 gap-4">
+                <div className="flex-shrink-0 w-full md:w-23/50">
                   <Image
                     src="/imgs/temple-tufas.jpg"
                     alt="Outdoor Climbing"
                     width={300}
                     height={200}
-                    className="object-cover w-full h-100"
+                    className="object-cover w-full h-120 rounded-2xl"
                   />
                 </div>
-                <div className="flex-1 text-center p-10 flex flex-col gap-5 md:text-left">
+                <div className="flex-1 text-center p-10 flex flex-col gap-8 md:text-left">
                   <h3 className="md:text-2xl text-xl font-semibold mb-2 lg:text-3xl">
                     TUFAS Bouldering Lounge
                   </h3>
@@ -101,24 +92,25 @@ export default function Home() {
                     Come with us for free every Friday to TUFAS Bouldering
                     Lounge, a rock climbing gym in Fishtown.
                   </p>
-                  <span className="badge badge-secondary mt-3 lg:badge-lg">
+                  <span className="badge badge-primary mt-3 lg:badge-lg">
                     Gyms
                   </span>
                 </div>
               </div>
 
               {/* Horizontal Card 3 */}
-              <div className="card bg-base-100 shadow-lg flex flex-col md:flex-row items-center p-0 gap-4 rounded-none">
-                <div className="flex-shrink-0 w-full md:w-24/50">
+              <div className="card bg-primary shadow-lg flex flex-col md:flex-row items-center p-0 gap-4">
+                <div className="flex-shrink-0 w-full md:w-23/50">
                   <Image
                     src="/imgs/temple-outdoor.jpg"
                     alt="Expert Guidance"
                     width={300}
                     height={200}
-                    className="object-cover w-full h-100"
+                    className="object-cover w-full h-120 md:rounded-l-2xl
+                    rounded-t-2xl md:rounded-t-none"
                   />
                 </div>
-                <div className="flex-1 text-center p-10 flex flex-col gap-5 md:text-left">
+                <div className="flex-1 text-center p-10 flex flex-col gap-8 md:text-left text-base-100">
                   <h3 className="md:text-2xl text-xl font-semibold mb-2 lg:text-3xl">
                     Outdoor Trips
                   </h3>
@@ -126,7 +118,7 @@ export default function Home() {
                     Join us on outdoor climbing trips to improve your skills and
                     experience the world of outdoor climbing.
                   </p>
-                  <span className="badge lg:badge-lg badge-neutral mt-3">
+                  <span className="badge lg:badge-lg badge-base-100 mt-3">
                     Outdoor
                   </span>
                 </div>
@@ -136,9 +128,9 @@ export default function Home() {
         </section>
 
         {/* CALL TO ACTION */}
-        <section className="mt-2 py-16 px-4 text-center bg-primary text-primary-content">
+        <section className="mt-6 py-16 px-4 text-center bg-black text-primary-content">
           <h2 className="text-4xl font-bold mb-6">Ready to Climb?</h2>
-          <Link href="/signup" className="btn btn-secondary btn-lg">
+          <Link href="/signup" className="btn btn-primary btn-lg">
             Sign Up Now
           </Link>
         </section>

@@ -8,7 +8,7 @@ import Modal from "./modal";
 const Navbar = () => {
   return (
     <>
-      <div className="bg-primary navbar fixed top-0 left-0 w-full z-50 p-0 h-16">
+      <div className="bg-primary navbar fixed top-0 left-0 w-full z-50 p-0 h-16 shadow-lg">
         <div className="navbar-start">
           <Dropdown />
 
