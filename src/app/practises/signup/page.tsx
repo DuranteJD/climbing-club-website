@@ -1,10 +1,12 @@
+// /app/practises/signup/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../../../../components/navbar";
 import Footer from "../../../../components/Footer";
 
+// ... (interface and formatDate function remain the same) ...
 interface SignUpFormData {
   id: string;
   name: string;
@@ -13,9 +15,8 @@ interface SignUpFormData {
 }
 
 const ADMIN_PASSWORD = "coachpass123";
-const MAX_CONFIRMED = 18; // Max confirmed signups per date
+const MAX_CONFIRMED = 18;
 
-// ✅ Safe formatter for YYYY-MM-DD (ignores timezones)
 const formatDate = (dateStr: string, opts?: Intl.DateTimeFormatOptions) => {
   const [year, month, day] = dateStr.split("-").map(Number);
   return new Date(year, month - 1, day).toLocaleDateString(
@@ -24,7 +25,8 @@ const formatDate = (dateStr: string, opts?: Intl.DateTimeFormatOptions) => {
   );
 };
 
-export default function PracticeSignUpPage() {
+// **1. Create a new component for the main content**
+function PracticeSignUpContent() {
   const searchParams = useSearchParams();
   const wantsAdmin = searchParams.get("admin") === "true";
 
@@ -38,6 +40,7 @@ export default function PracticeSignUpPage() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [checkedAdmin, setCheckedAdmin] = useState(false);
 
+  // ... (all other hooks and functions remain here) ...
   // Load stored signup IDs
   useEffect(() => {
     const savedIds = localStorage.getItem("myIds");
@@ -133,7 +136,6 @@ export default function PracticeSignUpPage() {
 
   return (
     <>
-      <Navbar />
       <div className="flex flex-col items-center p-6 pt-20 gap-6 max-w-[1400px] mx-auto">
         <p className="font-bold text-error">
           NOTE: ONLY SIGN UP FOR PRACTISES IF YOU ARE IN THE CLUB.
@@ -143,7 +145,6 @@ export default function PracticeSignUpPage() {
           <h1 className="text-3xl font-bold mb-4 text-center">
             Practice Sign-Up
           </h1>
-
           {submitted && (
             <div className="alert alert-success shadow-lg mb-4">
               <div>
@@ -151,7 +152,6 @@ export default function PracticeSignUpPage() {
               </div>
             </div>
           )}
-
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4 bg-base-200 p-6 rounded-xl shadow-lg"
@@ -288,6 +288,18 @@ export default function PracticeSignUpPage() {
           </div>
         )}
       </div>
+    </>
+  );
+}
+
+// **2. Wrap the new component in Suspense for the default export**
+export default function PageWithSuspense() {
+  return (
+    <>
+      <Navbar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PracticeSignUpContent />
+      </Suspense>
       <Footer />
     </>
   );
