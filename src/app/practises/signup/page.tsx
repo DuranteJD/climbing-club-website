@@ -138,7 +138,7 @@ function PracticeSignUpContent() {
     <>
       <div className="flex flex-col items-center p-6 pt-20 gap-6 max-w-[1400px] mx-auto">
         <p className="font-bold text-error">
-          NOTE: ONLY SIGN UP FOR PRACTISES IF YOU ARE IN THE CLUB.
+          NOTE: ONLY SIGN UP FOR PRACTICES IF YOU ARE IN THE CLUB.
         </p>
         {/* SIGNUP FORM */}
         <div className="w-full max-w-md">
