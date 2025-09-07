@@ -1,0 +1,24 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SignUp {
+  id      String @id @default(uuid())
+  name    String
+  date    String
+  status  String
+}
+
+model PracticeDate {
+  id   Int @id @default(autoincrement())
+  date String
+}
+

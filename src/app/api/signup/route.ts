@@ -1,84 +1,103 @@
 import { NextResponse } from "next/server";
-import { randomUUID } from "crypto";
-
-interface SignUpFormData {
-  id: string;
-  name: string;
-  date: string;
-  status: "confirmed" | "waitlist";
-}
-
-let signUps: SignUpFormData[] = [];
-let practiceDates: string[] = ["2025-09-05", "2025-09-12", "2025-09-19", "2025-09-26"]; // Added TUFAS
+import { prisma } from "@/lib/prisma";
 
 // POST: add signup
 export async function POST(req: Request) {
-  const body = (await req.json()) as Omit<SignUpFormData, "id" | "status">;
-
+  const body = await req.json() as { name: string; date: string };
   if (!body.name || !body.date) {
-    return NextResponse.json({ success: false, message: "Missing required fields" }, { status: 400 });
+    return NextResponse.json(
+      { success: false, message: "Missing required fields" },
+      { status: 400 }
+    );
   }
 
-  const duplicate = signUps.find(s => s.name === body.name && s.date === body.date);
+  const duplicate = await prisma.signUp.findFirst({
+    where: { name: body.name, date: body.date },
+  });
+
   if (duplicate) {
-    return NextResponse.json({ success: false, message: "Already signed up for this date" }, { status: 400 });
+    return NextResponse.json(
+      { success: false, message: "Already signed up for this date" },
+      { status: 400 }
+    );
   }
 
-  const confirmedCount = signUps.filter(s => s.date === body.date && s.status === "confirmed").length;
+  const confirmedCount = await prisma.signUp.count({
+    where: { date: body.date, status: "confirmed" },
+  });
 
-  const newSignUp: SignUpFormData = {
-    id: randomUUID(),
-    status: confirmedCount < 18 ? "confirmed" : "waitlist",
-    ...body,
-  };
-
-  signUps.push(newSignUp);
+  const newSignUp = await prisma.signUp.create({
+    data: {
+      name: body.name,
+      date: body.date,
+      status: confirmedCount < 18 ? "confirmed" : "waitlist",
+    },
+  });
 
   return NextResponse.json({ success: true, signup: newSignUp });
 }
 
-// GET: list signups and dates
+// GET: list signups + dates
 export async function GET() {
-  return NextResponse.json({ signUps, practiceDates });
+  const signUps = await prisma.signUp.findMany();
+  const practiceDates = await prisma.practiceDate.findMany({ orderBy: { date: "asc" } });
+
+  return NextResponse.json({
+    signUps,
+    practiceDates: practiceDates.map((d: { date: string }) => d.date),
+  });
 }
 
 // DELETE: remove signup by id
 export async function DELETE(req: Request) {
   const { id } = (await req.json()) as { id: string };
 
-  const signupToRemove = signUps.find(s => s.id === id);
+  const signupToRemove = await prisma.signUp.findUnique({ where: { id } });
   if (!signupToRemove) {
     return NextResponse.json({ success: false, message: "Signup not found" }, { status: 404 });
   }
 
-  // Remove signup
-  signUps = signUps.filter(s => s.id !== id);
+  await prisma.signUp.delete({ where: { id } });
 
-  // If a confirmed signup was removed, promote first waitlisted person for that date
+  // If confirmed removed → promote first waitlist
   if (signupToRemove.status === "confirmed") {
-    const waitlist = signUps.filter(s => s.date === signupToRemove.date && s.status === "waitlist");
+    const waitlist = await prisma.signUp.findMany({
+      where: { date: signupToRemove.date, status: "waitlist" },
+      orderBy: { id: "asc" },
+    });
+
     if (waitlist.length > 0) {
-      waitlist[0].status = "confirmed";
+      await prisma.signUp.update({
+        where: { id: waitlist[0].id },
+        data: { status: "confirmed" },
+      });
     }
   }
 
   return NextResponse.json({ success: true });
 }
 
-// PUT: update practice dates (admin)
+// PUT: update practice dates
 export async function PUT(req: Request) {
   const body = (await req.json()) as { practiceDates: string[] };
-
   if (!Array.isArray(body.practiceDates)) {
-    return NextResponse.json({ success: false, message: "Invalid dates" }, { status: 400 });
+    return NextResponse.json(
+      { success: false, message: "Invalid dates" },
+      { status: 400 }
+    );
   }
 
-  practiceDates = body.practiceDates;
-  return NextResponse.json({ success: true, practiceDates });
+  // clear old dates and insert new ones
+  await prisma.practiceDate.deleteMany({});
+  await prisma.practiceDate.createMany({
+    data: body.practiceDates.map((d) => ({ date: d })),
+  });
+
+  return NextResponse.json({ success: true, practiceDates: body.practiceDates });
 }
 
-// PATCH: clear all signups (admin)
+// PATCH: clear all signups
 export async function PATCH() {
-  signUps = [];
+  await prisma.signUp.deleteMany({});
   return NextResponse.json({ success: true, message: "All signups cleared" });
 }
